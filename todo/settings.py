@@ -46,7 +46,11 @@ THIRD_PARTY_APPS = [
     'rest_framework',
 ]
 
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS
+PROJECT_APPS = [
+    'users',
+]
+
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -89,6 +93,11 @@ DATABASES = {
         cast=dj_url
     )
 }
+
+
+# Auth User
+
+AUTH_USER_MODEL = 'users.User'
 
 
 # Password validation
