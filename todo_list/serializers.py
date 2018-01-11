@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import TodoList
+from .models import Task, TodoList
 
 
 class TodoListSerializer(serializers.ModelSerializer):
@@ -8,3 +8,10 @@ class TodoListSerializer(serializers.ModelSerializer):
     class Meta:
         model = TodoList
         fields = ['name']
+
+
+class TaskSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Task
+        fields = ['name', 'todo_list', 'due_date', 'owner']
