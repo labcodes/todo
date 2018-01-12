@@ -7,7 +7,7 @@ from django.urls import reverse
 class SignUpViewTest(TestCase):
 
     def setUp(self):
-        self.url = reverse('users:signup')
+        self.url = reverse('users:signup', kwargs={'version': 'v1.0'})
 
     def test_view_doesnt_require_authentication(self):
         response = self.client.post(self.url)
