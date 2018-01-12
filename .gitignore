@@ -102,3 +102,10 @@ ENV/
 
 # Sqlite
 db.sqlite3
+
+# Node
+node_modules
+package-lock.json
+
+# Webpack
+webpack-stats.json
