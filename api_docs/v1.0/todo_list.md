@@ -30,30 +30,30 @@ Create a new To-Do List.
 
 - Request (application/json)
 
-`
+```
   {
     "name": "Things to do",
   }
-`
+```
 
 - Response **201 CREATED** (application/json)
 
-`
+```
   {
     "id": 1,
     "name": "Things to do"
   }
-`
+```
 
 - Error **400 BAD REQUEST**
 
-`
+```
   {
     "name": [
         "This field may not be blank."
     ]
   }
-`
+```
 
 ## To-Do List Detail /todo/todo_list/<id>/
 
@@ -68,12 +68,12 @@ Retrieve To-Do List with the given id.
 
 - Response **200 OK** (application/json)
 
-`
+```
   {
     "id": 1,
     "name": "Things to do"
   }
-`
+```
 
 ### PUT /todo/todo_list/1/
 
@@ -81,27 +81,27 @@ Update To-Do List with the given id.
 
 - Request (application/json)
 
-`
+```
   {
     "name": "Things to do",
   }
-`
+```
 
 - Response **200 OK**
 
-`
+```
   {
     "id": 1,
     "name": "Things to do"
   }
-`
+```
 
 - Error **400 BAD REQUEST**
 
-`
+```
   {
     "name": [
         "This field may not be blank."
     ]
   }
-`
+```
