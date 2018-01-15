@@ -13,16 +13,16 @@ class TodoListViewSetTest(TestCase, APITestCaseMixin):
     def setUp(self):
         self.setup_client()
 
-        self.todo = mommy.make('todo_list.TodoList')
+        todo = mommy.make('todo_list.TodoList')
         self.list_url = reverse(
             'todo_list:todo_list-list',
             kwargs={'version': 'v1.0'}
         )
         self.detail_url = reverse(
             'todo_list:todo_list-detail',
-            kwargs={'version': 'v1.0', 'pk': self.todo.pk}
+            kwargs={'version': 'v1.0', 'pk': todo.pk}
         )
-        self.data = self.post_data = TodoListSerializer(instance=self.todo).data
+        self.data = self.post_data = TodoListSerializer(instance=todo).data
 
 
 class TasktViewSetTest(TestCase, APITestCaseMixin):
@@ -30,7 +30,13 @@ class TasktViewSetTest(TestCase, APITestCaseMixin):
     def setUp(self):
         self.setup_client()
 
-        self.task = mommy.make('todo_list.Task', due_date=timezone.now().date())
-        self.list_url = reverse('todo_list:task-list')
-        self.detail_url = reverse('todo_list:task-detail', args=[self.task.pk])
-        self.data = self.post_data = TaskSerializer(instance=self.task).data
+        task = mommy.make('todo_list.Task', due_date=timezone.now().date())
+        self.list_url = reverse(
+            'todo_list:task-list',
+            kwargs={'version': 'v1.0'}
+        )
+        self.detail_url = reverse(
+            'todo_list:task-detail',
+            kwargs={'version': 'v1.0', 'pk': task.pk}
+        )
+        self.data = self.post_data = TaskSerializer(instance=task).data
