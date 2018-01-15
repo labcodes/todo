@@ -48,6 +48,7 @@ class TaskSerializerTest(TestCase):
         task = mommy.make(Task, due_date=self.date)
         serializer = TaskSerializer(instance=task)
         data = {
+            'id': task.id,
             'name': task.name,
             'todo_list': task.todo_list.id,
             'due_date': self.date.isoformat(),
