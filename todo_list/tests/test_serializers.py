@@ -10,7 +10,7 @@ class UserSerializerTest(TestCase):
     def test_serializer_returns_correct_data(self):
         todo = mommy.make(TodoList)
         serializer = TodoListSerializer(instance=todo)
-        self.assertEqual(serializer.data, {'name': todo.name})
+        self.assertEqual(serializer.data, {'name': todo.name, 'id': todo.id})
 
     def test_serializer_creates_instance_correctly(self):
         data = {'name': 'Do something'}
