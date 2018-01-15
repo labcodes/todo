@@ -20,8 +20,14 @@ class TodoListViewSetTest(TestCase):
 
     def setUp(self):
         self.todo = mommy.make('todo_list.TodoList')
-        self.list_url = reverse('todo_list:todo_list-list')
-        self.detail_url = reverse('todo_list:todo_list-detail', args=[self.todo.pk])
+        self.list_url = reverse(
+            'todo_list:todo_list-list',
+            kwargs={'version': 'v1.0'}
+        )
+        self.detail_url = reverse(
+            'todo_list:todo_list-detail',
+            kwargs={'version': 'v1.0', 'pk': self.todo.pk}
+        )
         self.api_client = APIClient()
         self.user = mommy.make('users.User')
         self.api_client.credentials(
