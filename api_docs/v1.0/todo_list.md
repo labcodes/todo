@@ -15,14 +15,14 @@ Retrieve all To-Do Lists.
 
 - Response **200 OK** (application/json)
 
-`
+```
   [
     {
       "id": 1,
       "name": "Things to do"
     }
   ]
-`
+```
 
 ### POST /todo/todo_list/
 
