@@ -19,6 +19,6 @@ from django.urls import include, path, re_path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    re_path('api/(?P<version>(v1.0))/todo/', include('todo_list.urls', namespace='todo_list')),
     re_path('api/(?P<version>(v1.0))/users/', include('users.urls', namespace='users')),
-    re_path('api/(?P<version>(v1.0))/todo/', include('users.urls', namespace='todo_list')),
 ]
