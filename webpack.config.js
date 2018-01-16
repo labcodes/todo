@@ -6,7 +6,7 @@ var UgliFyJS = require('uglifyjs-webpack-plugin');
 
 
 module.exports = {
-  entry: './index',
+  entry:  path.join(__dirname, 'assets/src/js/index'),
 
   output: {
     path: path.join(__dirname, 'assets/dist'),
@@ -23,7 +23,7 @@ module.exports = {
     }),
     new UgliFyJS()
   ],
-  
+
   module: {
     rules: [
       {
@@ -43,5 +43,6 @@ module.exports = {
         })
       },
     ],
-  }
+  },
+
 }
