@@ -10,7 +10,7 @@ module.exports = {
 
   output: {
     path: path.join(__dirname, 'assets/dist'),
-    filename: 'main.js'
+    filename: '[name]-[hash].js'
   },
 
   plugins: [
@@ -19,7 +19,7 @@ module.exports = {
       filename: 'webpack-stats.json'
     }),
     new ExtractText({
-      filename: 'main.css'
+      filename: '[name]-[hash].css'
     }),
     new UgliFyJS()
   ],
