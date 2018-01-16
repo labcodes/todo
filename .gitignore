@@ -109,4 +109,3 @@ package-lock.json
 
 # Webpack
 webpack-stats.json
-assets/bundles/
