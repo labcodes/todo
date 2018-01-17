@@ -7,7 +7,7 @@ from .views import TodoListViewSet
 
 router = SimpleRouter()
 
-router.register(r'todo_list', TodoListViewSet, base_name='todo_list')
+router.register(r'todo-list', TodoListViewSet, base_name='todo_list')
 
 app_name = 'todo_list'
 urlpatterns = [
