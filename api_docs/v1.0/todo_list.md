@@ -2,14 +2,14 @@
 
 Resources for the To-Do List domain.
 
-## List and Create To-Do Lists /todo/todo_list/
+## List and Create To-Do Lists /todo/todo-list/
 
 List and create To-Do Lists:
 
 - **id**
 - **name**
 
-### GET /todo/todo_list/
+### GET /todo/todo-list/
 
 Retrieve all To-Do Lists.
 
@@ -24,7 +24,7 @@ Retrieve all To-Do Lists.
   ]
 ```
 
-### POST /todo/todo_list/
+### POST /todo/todo-list/
 
 Create a new To-Do List.
 
@@ -55,14 +55,14 @@ Create a new To-Do List.
   }
 ```
 
-## To-Do List Detail /todo/todo_list/<id>/
+## To-Do List Detail /todo/todo-list/<id>/
 
 Retrieve, update and delete a To-Do List by it's id
 
 - **id**
 - **name**
 
-### GET /todo/todo_list/1/
+### GET /todo/todo-list/1/
 
 Retrieve To-Do List with the given id.
 
@@ -75,7 +75,7 @@ Retrieve To-Do List with the given id.
   }
 ```
 
-### PUT /todo/todo_list/1/
+### PUT /todo/todo-list/1/
 
 Update To-Do List with the given id.
 
