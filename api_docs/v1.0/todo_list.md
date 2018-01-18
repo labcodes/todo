@@ -2,14 +2,14 @@
 
 Resources for the To-Do List domain.
 
-## List and Create To-Do Lists /todo/todo-list/
+## List and Create To-Do Lists /todo/todo-lists/
 
 List and create To-Do Lists:
 
 - **id**
 - **name**
 
-### GET /todo/todo-list/
+### GET /todo/todo-lists/
 
 Retrieve all To-Do Lists.
 
@@ -24,7 +24,7 @@ Retrieve all To-Do Lists.
   ]
 ```
 
-### POST /todo/todo-list/
+### POST /todo/todo-lists/
 
 Create a new To-Do List.
 
@@ -55,14 +55,14 @@ Create a new To-Do List.
   }
 ```
 
-## To-Do List Detail /todo/todo-list/<id>/
+## To-Do List Detail /todo/todo-lists/<id>/
 
 Retrieve, update and delete a To-Do List by it's id
 
 - **id**
 - **name**
 
-### GET /todo/todo-list/1/
+### GET /todo/todo-lists/1/
 
 Retrieve To-Do List with the given id.
 
@@ -75,7 +75,7 @@ Retrieve To-Do List with the given id.
   }
 ```
 
-### PUT /todo/todo-list/1/
+### PUT /todo/todo-lists/1/
 
 Update To-Do List with the given id.
 
@@ -106,7 +106,7 @@ Update To-Do List with the given id.
   }
 ```
 
-### PATCH /todo/todo-list/1/
+### PATCH /todo/todo-lists/1/
 
 Partially update To-Do List with the given id.
 
@@ -137,14 +137,14 @@ Partially update To-Do List with the given id.
   }
 ```
 
-### DELETE /todo/todo-list/1/
+### DELETE /todo/todo-lists/1/
 
 Delete To-Do List with the given id.
 
 - Response **204 NO CONTENT**
 
 
-## List and Create Tasks /todo/task/
+## List and Create Tasks /todo/tasks/
 
 List and create Tasks:
 
@@ -154,7 +154,7 @@ List and create Tasks:
 - **due_date**: ISO date
 - **owner**: User primary key
 
-### GET /todo/task/
+### GET /todo/tasks/
 
 Retrieve all Tasks.
 
@@ -172,7 +172,7 @@ Retrieve all Tasks.
   ]
 ```
 
-### POST /todo/task/
+### POST /todo/tasks/
 
 Create a new Task.
 
@@ -218,7 +218,7 @@ Create a new Task.
   }
 ```
 
-## Task Detail /todo/task/<id>/
+## Task Detail /todo/tasks/<id>/
 
 Retrieve, update and delete a Task List by it's id
 
@@ -228,7 +228,7 @@ Retrieve, update and delete a Task List by it's id
 - **due_date**: ISO date
 - **owner**: User primary key
 
-### GET /todo/task/1/
+### GET /todo/tasks/1/
 
 Retrieve Task with the given id.
 
@@ -244,7 +244,7 @@ Retrieve Task with the given id.
   }
 ```
 
-### PUT /todo/task/1/
+### PUT /todo/tasks/1/
 
 Update Task with the given id.
 
@@ -290,7 +290,7 @@ Update Task with the given id.
   }
 ```
 
-### PATCH /todo/task/1/
+### PATCH /todo/tasks/1/
 
 Partially update Task with the given id.
 
@@ -334,7 +334,7 @@ Partially update Task with the given id.
   }
 ```
 
-### DELETE /todo/task/1/
+### DELETE /todo/tasks/1/
 
 Delete Task with the given id.
 
