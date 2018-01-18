@@ -106,7 +106,7 @@ Update To-Do List with the given id.
   }
 ```
 
-### PATCH /todo/todo_list/1/
+### PATCH /todo/todo-list/1/
 
 Partially update To-Do List with the given id.
 
@@ -137,7 +137,7 @@ Partially update To-Do List with the given id.
   }
 ```
 
-### DELETE /todo/todo_list/1/
+### DELETE /todo/todo-list/1/
 
 Delete To-Do List with the given id.
 
