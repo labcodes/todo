@@ -7,10 +7,11 @@ import {
 
 describe('login user action', () => {
     it('loginUser should create LOGIN_USER action', () => {
-        expect(loginUser('username', 'password')).toEqual({
+        expect(
+            loginUser({username: 'username', token: 'token'})
+        ).toEqual({
             type: 'LOGIN_USER',
-            username: 'username',
-            password: 'password'
+            payload: {username: 'username', token: 'token'}
         })
     })
 })

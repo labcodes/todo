@@ -1,11 +1,10 @@
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
 
-export function loginUser(username, password) {
+export function loginUser(obj) {
     return {
         type: LOGIN_USER,
-        username,
-        password
+        payload: obj
     }
 }
 
