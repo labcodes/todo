@@ -1,47 +1,48 @@
 import React from 'react';
 import {
-  Collapse,
   Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink } from 'reactstrap';
+  NavbarBrand
+} from 'reactstrap';
+
+import { logoutUser } from '../../actions/user';
+import { loginUser } from '../../actions/user';
+
+import store from '../../store';
+
+import LoggedUser from '../LoggedUser';
+import LoginButton from '../LoginButton';
+
 
 class Header extends React.Component {
-  constructor(props) {
-    super(props);
+    constructor (props) {
+        super(props);
+    }
 
-    this.toggle = this.toggle.bind(this);
-    this.state = {
-      isOpen: false
-    };
-  }
-  toggle() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  }
-  render() {
-    return (
-      <div>
-        <Navbar color="faded" light expand="md">
-          <NavbarBrand href="/">To-Do List</NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href="/">Signin</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="https://github.com/labcodes/todo">Github</NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
-        </Navbar>
-      </div>
-    );
-  }
+    logoutUser () {
+        store.dispatch(logoutUser())
+    }
+
+    loginUser () {
+        // api
+        store.dispatch(
+            loginUser({username: 'username', token: 'token'})
+        )
+    }
+
+    render () {
+        const {username} = this.props;
+        return (
+            <div>
+                <Navbar color="faded" light expand="md">
+                  <NavbarBrand href="/">To-Do List</NavbarBrand>
+                  {username ?
+                      <LoggedUser logoutUser={this.logoutUser} username={username}/> :
+                      <LoginButton loginUser={this.loginUser.bind(this)}/>
+                  }
+                </Navbar>
+            </div>
+        )
+    }
 }
 
 export default Header;
