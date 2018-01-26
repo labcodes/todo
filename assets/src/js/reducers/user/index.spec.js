@@ -23,8 +23,7 @@ describe('user reducer', () => {
     it('should handle LOGIN_USER', () => {
         const loginAction = {
             type: 'LOGIN_USER',
-            username: 'username',
-            password: 'password'
+            payload: loggedUser
         }
 
         expect(

@@ -10,14 +10,15 @@ const initialState = {
 };
 
 export const user = (state = initialState, action) => {
-    switch (action.type) {
+    const { type, payload } = action;
+    switch (type) {
         case LOGIN_USER:
-            return {
-                username: action.username,
-                token: 'token'
-            }
+            return Object.assign({}, state, {
+                username: payload.username,
+                token: payload.token
+            })
         case LOGOUT_USER:
-            return initialState
+            return Object.assign({}, state, initialState)
         default:
             return state
     }
