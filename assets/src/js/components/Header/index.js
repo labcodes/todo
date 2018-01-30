@@ -1,33 +1,35 @@
 import React from 'react';
 import {
-  Navbar,
-  NavbarBrand
+    Button,
+    ButtonGroup,
+    Navbar,
+    NavbarBrand,
+    Popover,
+    PopoverHeader,
+    PopoverBody
 } from 'reactstrap';
 
-import { logoutUser } from '../../actions/user';
-import { loginUser } from '../../actions/user';
-
-import store from '../../store';
-
 import LoggedUser from '../LoggedUser';
-import LoginButton from '../LoginButton';
+import LoginForm from '../LoginForm';
 
 
 class Header extends React.Component {
     constructor (props) {
         super(props);
+
+        this.toggleLoginPopover = this.toggleLoginPopover.bind(this);
+
+        this.state = {
+            loginPopoverOpen: false,
+        };
     }
 
-    logoutUser () {
-        store.dispatch(logoutUser())
+    toggleLoginPopover() {
+        this.setState({
+            loginPopoverOpen: !this.state.loginPopoverOpen
+        });
     }
 
-    loginUser () {
-        // api
-        store.dispatch(
-            loginUser({username: 'username', token: 'token'})
-        )
-    }
 
     render () {
         const {username} = this.props;
@@ -35,10 +37,27 @@ class Header extends React.Component {
             <div>
                 <Navbar color="faded" light expand="md">
                   <NavbarBrand href="/">To-Do List</NavbarBrand>
-                  {username ?
-                      <LoggedUser logoutUser={this.logoutUser} username={username}/> :
-                      <LoginButton loginUser={this.loginUser.bind(this)}/>
-                  }
+
+                  <div className={!!username ? '' : 'sr-only'}>
+                      <LoggedUser username={username}/>
+                  </div>
+
+                  <div className={!!username ? 'sr-only' : ''}>
+                      <ButtonGroup>
+                          <Button onClick={this.toggleLoginPopover} id="LoginPopover">Login</Button>
+                      </ButtonGroup>
+                      <Popover
+                          placement="bottom"
+                          isOpen={this.state.loginPopoverOpen}
+                          target="LoginPopover"
+                          toggle={this.toggleLoginPopover}>
+                          <PopoverHeader>Login</PopoverHeader>
+                          <PopoverBody>
+                              <LoginForm successCallback={this.toggleLoginPopover}/>
+                          </PopoverBody>
+                      </Popover>
+                  </div>
+
                 </Navbar>
             </div>
         )
