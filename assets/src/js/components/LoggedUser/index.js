@@ -1,26 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Form, FormGroup, Label } from 'reactstrap';
+import { Button } from 'reactstrap';
 
-const LoggedUser = ({ username, logoutUser }) => {
-    return (
-        <Form inline>
-            <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                <Label className="mr-sm-2">Welcome, {username}!</Label>
-            </FormGroup>
-            <Button onClick={logoutUser}>Logout</Button>
-        </Form>
-    )
+import store from '../../store';
+import { logoutUser } from '../../actions/user';
+
+
+class LoggedUser extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.logoutUser = this.logoutUser.bind(this);
+    }
+
+    logoutUser () {
+        store.dispatch(logoutUser())
+    }
+
+    render () {
+        const {username} = this.props;
+        return (
+            <div>
+                Welcome, {username}! 
+                <Button onClick={this.logoutUser}>Logout</Button>
+            </div>
+        )
+    }
 }
 
 LoggedUser.defaultProps = {
     username: '',
-    logoutUser: () => {}
 }
 
 LoggedUser.propTypes = {
     username: PropTypes.string.isRequired,
-    logoutUser: PropTypes.func.isRequired
 }
 
 export default LoggedUser;
