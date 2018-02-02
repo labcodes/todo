@@ -10,7 +10,7 @@ import {
 } from 'reactstrap';
 
 import LoggedUser from '../LoggedUser';
-import LoginForm from '../LoginForm';
+import UserForm from '../UserForm';
 
 
 class Header extends React.Component {
@@ -18,15 +18,23 @@ class Header extends React.Component {
         super(props);
 
         this.toggleLoginPopover = this.toggleLoginPopover.bind(this);
+        this.toggleSignupPopover = this.toggleSignupPopover.bind(this);
 
         this.state = {
             loginPopoverOpen: false,
+            signupPopoverOpen: false,
         };
     }
 
     toggleLoginPopover() {
         this.setState({
             loginPopoverOpen: !this.state.loginPopoverOpen
+        });
+    }
+
+    toggleSignupPopover() {
+        this.setState({
+            signupPopoverOpen: !this.state.signupPopoverOpen
         });
     }
 
@@ -39,21 +47,33 @@ class Header extends React.Component {
                   <NavbarBrand href="/">To-Do List</NavbarBrand>
 
                   <div className={!!username ? '' : 'sr-only'}>
-                      <LoggedUser username={username}/>
+                      <LoggedUser username={username || ''}/>
                   </div>
 
                   <div className={!!username ? 'sr-only' : ''}>
-                      <ButtonGroup>
-                          <Button onClick={this.toggleLoginPopover} id="LoginPopover">Login</Button>
-                      </ButtonGroup>
+                      <Button onClick={this.toggleLoginPopover} id="LoginButton">Login</Button>
+                      {' '}
+                      <Button onClick={this.toggleSignupPopover} id="SignupButton">Signup</Button>
+
                       <Popover
                           placement="bottom"
                           isOpen={this.state.loginPopoverOpen}
-                          target="LoginPopover"
+                          target="LoginButton"
                           toggle={this.toggleLoginPopover}>
                           <PopoverHeader>Login</PopoverHeader>
                           <PopoverBody>
-                              <LoginForm successCallback={this.toggleLoginPopover}/>
+                              <UserForm action={'LOGIN'} successCallback={this.toggleLoginPopover}/>
+                          </PopoverBody>
+                      </Popover>
+
+                      <Popover
+                          placement="bottom"
+                          isOpen={this.state.signupPopoverOpen}
+                          target="SignupButton"
+                          toggle={this.toggleSignupPopover}>
+                          <PopoverHeader>Signup</PopoverHeader>
+                          <PopoverBody>
+                              <UserForm action={'SIGNUP'} successCallback={this.toggleSignupPopover}/>
                           </PopoverBody>
                       </Popover>
                   </div>
