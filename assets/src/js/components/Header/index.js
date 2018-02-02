@@ -47,11 +47,11 @@ class Header extends React.Component {
                 <Navbar color="faded" light expand="md">
                   <NavbarBrand href="/">To-Do List</NavbarBrand>
 
-                  <div className={!!name ? '' : 'sr-only'}>
+                  <div className={!!name ? '' : 'd-none'}>
                       <LoggedUser name={name || ''}/>
                   </div>
 
-                  <div className={!!name ? 'sr-only' : ''}>
+                  <div className={!!name ? 'd-none' : ''}>
                       <Button onClick={this.toggleLoginPopover} id="LoginButton">Login</Button>
                       {' '}
                       <Button onClick={this.toggleSignupPopover} id="SignupButton">Signup</Button>
