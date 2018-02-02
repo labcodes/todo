@@ -8,6 +8,7 @@ import {
     PopoverHeader,
     PopoverBody
 } from 'reactstrap';
+import PropTypes from 'prop-types';
 
 import LoggedUser from '../LoggedUser';
 import UserForm from '../UserForm';
@@ -47,7 +48,7 @@ class Header extends React.Component {
                   <NavbarBrand href="/">To-Do List</NavbarBrand>
 
                   <div className={!!name ? '' : 'sr-only'}>
-                      <LoggedUser username={name || ''}/>
+                      <LoggedUser name={name || ''}/>
                   </div>
 
                   <div className={!!name ? 'sr-only' : ''}>
@@ -82,6 +83,14 @@ class Header extends React.Component {
             </div>
         )
     }
+}
+
+Header.defaultProps = {
+    name: '',
+}
+
+Header.propTypes = {
+    name: PropTypes.string.isRequired,
 }
 
 export default Header;

@@ -6,34 +6,25 @@ import store from '../../store';
 import { logoutUser } from '../../actions/user';
 
 
-class LoggedUser extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.logoutUser = this.logoutUser.bind(this);
-    }
-
-    logoutUser () {
+const LoggedUser = ({ name }) => {
+    const handleClick = () => {
         store.dispatch(logoutUser())
     }
 
-    render () {
-        const {username} = this.props;
-        return (
-            <div>
-                Welcome, {username}! 
-                <Button onClick={this.logoutUser}>Logout</Button>
-            </div>
-        )
-    }
+    return (
+        <div>
+            Welcome, {name}!
+            <Button onClick={handleClick}>Logout</Button>
+        </div>
+    )
 }
 
 LoggedUser.defaultProps = {
-    username: '',
+    name: '',
 }
 
 LoggedUser.propTypes = {
-    username: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
 }
 
 export default LoggedUser;

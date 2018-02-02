@@ -85,12 +85,17 @@ class UserForm extends React.Component {
     }
 
     render() {
-        const formError = () => (
-            this.state.formError &&
-            <Alert color="danger">
-              {this.state.formError}
-            </Alert>
-        )
+
+        const {
+            emailIsValid,
+            nameIsValid,
+            passwordIsValid,
+            emailError,
+            nameError,
+            passwordError,
+            formError,
+        } = this.state;
+
         const nameInput = () => (
             this.action == this.SIGNUP &&
             <FormGroup>
@@ -100,18 +105,17 @@ class UserForm extends React.Component {
                     name="name"
                     type="text"
                     onChange={(e) => this.formData.name = e.target.value}
-                    valid={this.state.nameIsValid}
+                    valid={nameIsValid}
                 />
-            <FormFeedback>{this.state.nameError}</FormFeedback>
+            <FormFeedback>{nameError}</FormFeedback>
             </FormGroup>
         )
+
+
         return(
             <Form onSubmit={this.handleSubmit}>
-
-                {formError()}
-
+                {formError && <Alert color="danger">{formError}</Alert>}
                 {nameInput()}
-
                 <FormGroup>
                     <Label for="emailInput">Email</Label>
                     <Input
@@ -119,9 +123,9 @@ class UserForm extends React.Component {
                         name="email"
                         type="email"
                         onChange={(e) => this.formData.email = e.target.value}
-                        valid={this.state.emailIsValid}
+                        valid={emailIsValid}
                     />
-                    <FormFeedback>{this.state.emailError}</FormFeedback>
+                    <FormFeedback>{emailError}</FormFeedback>
                 </FormGroup>
 
                 <FormGroup>
@@ -131,9 +135,9 @@ class UserForm extends React.Component {
                         name="password"
                         type="password"
                         onChange={(e) => this.formData.password = e.target.value}
-                        valid={this.state.passwordIsValid}
+                        valid={passwordIsValid}
                     />
-                    <FormFeedback>{this.state.passwordError}</FormFeedback>
+                    <FormFeedback>{passwordError}</FormFeedback>
                 </FormGroup>
 
                 <Button type="submit">Submit</Button>
