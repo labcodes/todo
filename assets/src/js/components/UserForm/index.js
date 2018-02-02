@@ -11,6 +11,7 @@ import {
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
+import APIService from '../../services';
 import store from '../../store';
 import { loginUser } from '../../actions/user';
 
@@ -21,11 +22,6 @@ class UserForm extends React.Component {
 
         this.LOGIN = 'LOGIN';
         this.SIGNUP = 'SIGNUP';
-
-        this.URLs = {
-            LOGIN: 'api/v1.0/users/api-token-auth/',
-            SIGNUP: 'api/v1.0/users/signup/',
-        }
 
         this.action = props.action;
         this.successCallback = props.successCallback;
@@ -50,25 +46,24 @@ class UserForm extends React.Component {
     }
 
     handleSubmit (e) {
-        axios({
-            url: this.URLs[this.action],
-            method: 'POST',
-            headers: {
-              "Content-type": "application/json"
-            },
-            data: JSON.stringify(this.formData)
-        })
+        const service = new APIService();
+        const action = this.action == this.LOGIN ?
+            service.login :
+            service.signup;
+
+        action(this.formData)
         .then((response) => {
             store.dispatch(loginUser({
-                email: response.data.user.email,
-                name: response.data.user.name,
-                token: response.data.token
+                email: response.user.email,
+                name: response.user.name,
+                token: response.token
             }))
             this.successCallback();
         })
         .catch((reason) => {
-            this.setErrors(reason.response.data);
-        })
+            this.setErrors(reason);
+        });
+
         e.preventDefault();
     }
 
