@@ -5,7 +5,8 @@ import {
 
 
 const initialState = {
-    username: null,
+    email: null,
+    name: null,
     token: null
 };
 
@@ -14,7 +15,8 @@ export const user = (state = initialState, action) => {
     switch (type) {
         case LOGIN_USER:
             return Object.assign({}, state, {
-                username: payload.username,
+                email: payload.email,
+                name: payload.name,
                 token: payload.token
             })
         case LOGOUT_USER:

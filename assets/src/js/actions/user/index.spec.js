@@ -8,10 +8,10 @@ import {
 describe('login user action', () => {
     it('loginUser should create LOGIN_USER action', () => {
         expect(
-            loginUser({username: 'username', token: 'token'})
+            loginUser({name: 'name', email: 'email', token: 'token'})
         ).toEqual({
             type: 'LOGIN_USER',
-            payload: {username: 'username', token: 'token'}
+            payload: {name: 'name', email: 'email', token: 'token'}
         })
     })
 })

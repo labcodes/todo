@@ -3,12 +3,14 @@ import { user } from './index';
 describe('user reducer', () => {
 
     const undefinedUser = {
-        username: null,
+        name: null,
+        email: null,
         token: null
     };
 
     const loggedUser = {
-        username: 'username',
+        name: 'Name',
+        email: 'mail@mail.com',
         token: 'token'
     };
 
