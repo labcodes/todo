@@ -40,17 +40,17 @@ class Header extends React.Component {
 
 
     render () {
-        const {username} = this.props;
+        const {name} = this.props;
         return (
             <div>
                 <Navbar color="faded" light expand="md">
                   <NavbarBrand href="/">To-Do List</NavbarBrand>
 
-                  <div className={!!username ? '' : 'sr-only'}>
-                      <LoggedUser username={username || ''}/>
+                  <div className={!!name ? '' : 'sr-only'}>
+                      <LoggedUser username={name || ''}/>
                   </div>
 
-                  <div className={!!username ? 'sr-only' : ''}>
+                  <div className={!!name ? 'sr-only' : ''}>
                       <Button onClick={this.toggleLoginPopover} id="LoginButton">Login</Button>
                       {' '}
                       <Button onClick={this.toggleSignupPopover} id="SignupButton">Signup</Button>

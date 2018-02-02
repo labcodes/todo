@@ -13,7 +13,7 @@ class App extends React.Component {
       const { user } = this.props;
 
       return (
-          <Header username={user.username}/>
+          <Header name={user.name}/>
       )
     }
 }
