@@ -40,6 +40,7 @@ DJANGO_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'webpack_loader',
 ]
 
 THIRD_PARTY_APPS = [
@@ -68,7 +69,7 @@ ROOT_URLCONF = 'todo.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR.child('templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -139,7 +140,24 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = (
+    BASE_DIR.child('assets'),
+)
+
+
+# Webpack Loader
+# https://github.com/ezhome/django-webpack-loader
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'dist/',
+        'STATS_FILE': BASE_DIR.child('webpack-stats.json'),
+    }
+}
+
+
 # REST Framework
+# http://www.django-rest-framework.org/api-guide/settings/
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (

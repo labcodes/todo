@@ -1,0 +1,16 @@
+{% load render_bundle from webpack_loader %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do List App</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
+    <!-- Webpack rendered CSS -->
+    {% render_bundle 'main' 'css' %}
+</head>
+
+<body>
+    <div id="react-app"></div>
+    {% render_bundle 'main' 'js' %}
+</body>
+</html>
