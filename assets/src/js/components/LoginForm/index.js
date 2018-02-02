@@ -77,15 +77,17 @@ class LoginForm extends React.Component {
     }
 
     render() {
-        const formError = () => (
-            this.state.formError &&
-            <Alert color="danger">
-              {this.state.formError}
-            </Alert>
-        )
+        const {
+            emailIsValid,
+            passwordIsValid,
+            emailError,
+            passwordError,
+            formError,
+        } = this.state;
+
         return(
             <Form onSubmit={this.handleSubmit}>
-                {formError()}
+                {formError && <Alert color="danger">{formError}</Alert>}
                 <FormGroup>
                     <Label for="emailInput">Email</Label>
                     <Input
@@ -93,9 +95,9 @@ class LoginForm extends React.Component {
                         name="email"
                         type="email"
                         onChange={(e) => this.setEmail(e.target.value)}
-                        valid={this.state.emailIsValid}
+                        valid={emailIsValid}
                     />
-                    <FormFeedback>{this.state.emailError}</FormFeedback>
+                    <FormFeedback>{emailError}</FormFeedback>
                 </FormGroup>
 
                 <FormGroup>
@@ -105,9 +107,9 @@ class LoginForm extends React.Component {
                         name="password"
                         type="password"
                         onChange={(e) => this.setPassword(e.target.value)}
-                        valid={this.state.passwordIsValid}
+                        valid={passwordIsValid}
                     />
-                    <FormFeedback>{this.state.passwordError}</FormFeedback>
+                    <FormFeedback>{passwordError}</FormFeedback>
                 </FormGroup>
 
                 <Button type="submit">Submit</Button>

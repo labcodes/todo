@@ -10,10 +10,10 @@ class App extends React.Component {
     }
 
     render() {
-      const { user } = this.props;
+      const { user: { username } } = this.props;
 
       return (
-          <Header username={user.username}/>
+          <Header username={username}/>
       )
     }
 }
