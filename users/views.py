@@ -16,6 +16,8 @@ class SignUpView(CreateAPIView):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
-        data = serializer.data.copy()
-        data['token'] = generate_token(serializer.instance)
-        return Response(data=data, status=HTTP_201_CREATED, headers=headers)
+        response = {
+            'user': serializer.data,
+            'token': generate_token(serializer.instance),
+        }
+        return Response(response, status=HTTP_201_CREATED, headers=headers)
