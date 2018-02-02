@@ -9,11 +9,9 @@ class APIService {
         this.SIGNUP_URL = 'api/v1.0/users/signup/';
 
         this.post = this.post.bind(this);
-        this.login = this.login.bind(this);
-        this.signup = this.signup.bind(this);
     }
 
-    post (url, data, authenticated=false) {
+    post (url, data) {
         return new Promise((resolve, reject) => {
             axios({
                 url: url,
@@ -26,14 +24,6 @@ class APIService {
             .then(response => resolve(response.data))
             .catch(reason => reject(reason.response.data))
         })
-    }
-
-    login (data) {
-        return this.post(this.LOGIN_URL, data)
-    }
-
-    signup (data) {
-        return this.post(this.SIGNUP_URL, data)
     }
 
 }
