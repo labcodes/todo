@@ -47,11 +47,9 @@ class UserForm extends React.Component {
 
     handleSubmit (e) {
         const service = new APIService();
-        const action = this.action == this.LOGIN ?
-            service.login :
-            service.signup;
+        const url = service[`${this.action}_URL`]
 
-        action(this.formData)
+        service.post(url, this.formData)
         .then((response) => {
             store.dispatch(loginUser({
                 email: response.user.email,
