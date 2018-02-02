@@ -60,8 +60,8 @@ class UserForm extends React.Component {
         })
         .then((response) => {
             store.dispatch(loginUser({
-                username: this.formData.email,
-                token: response.token
+                username: response.data.user.name,
+                token: response.data.token
             }))
             this.successCallback();
         })
