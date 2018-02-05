@@ -24,6 +24,19 @@ class APIService {
         })
     }
 
+    get (url) {
+        const headers = this.getHeaders();
+        return new Promise((resolve, reject) => {
+            axios({
+                url: url,
+                method: 'GET',
+                headers: headers,
+            })
+            .then(response => resolve(response.data))
+            .catch(reason => reject(reason.response.data))
+        })
+    }
+
     getHeaders() {
         const storage = new StorageService();
         const token = storage.getToken();
