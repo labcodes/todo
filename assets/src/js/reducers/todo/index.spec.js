@@ -30,6 +30,19 @@ describe('todo reducer', () => {
         )
     })
 
+    it('should handle ADD_TODOS', () => {
+        const addTodosAction = {
+            type: 'ADD_TODOS',
+            payload: [todoItem]
+        }
+
+        expect(
+            todo(emptyState, addTodosAction)
+        ).toEqual(
+            notEmptyState
+        )
+    })
+
     it('should handle REMOVE_TODO', () => {
         const removeTodoAction = {
             type: 'REMOVE_TODO',

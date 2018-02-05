@@ -1,5 +1,6 @@
 import {
     ADD_TODO,
+    ADD_TODOS,
     REMOVE_TODO
 } from '../../actions/todo';
 
@@ -13,6 +14,11 @@ export const todo = (state = initialState, action) => {
             return [
                 ...state,
                 payload
+            ]
+        case ADD_TODOS:
+            return [
+                ...state,
+                ...payload
             ]
         case REMOVE_TODO:
             return state.filter(item => item.id != payload.id);
