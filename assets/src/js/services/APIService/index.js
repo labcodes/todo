@@ -6,6 +6,7 @@ class APIService {
     constructor () {
         this.LOGIN_URL = 'api/v1.0/users/api-token-auth/';
         this.SIGNUP_URL = 'api/v1.0/users/signup/';
+        this.TODO_LIST_URL = 'api/v1.0/todo/todo-lists/';
 
         this.post = this.post.bind(this);
     }
