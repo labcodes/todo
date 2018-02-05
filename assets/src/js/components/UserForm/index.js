@@ -11,7 +11,7 @@ import {
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-import APIService from '../../services';
+import { AuthService } from '../../services';
 import store from '../../store';
 import { loginUser } from '../../actions/user';
 
@@ -46,10 +46,10 @@ class UserForm extends React.Component {
     }
 
     handleSubmit (e) {
-        const service = new APIService();
-        const url = service[`${this.action}_URL`]
+        const service = new AuthService();
+        const action = this.action == this.LOGIN ? service.loginUser : service.signupUser;
 
-        service.post(url, this.formData)
+        action(this.formData)
         .then((response) => {
             store.dispatch(loginUser({
                 email: response.user.email,

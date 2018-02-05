@@ -2,13 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 
+
+import { AuthService } from '../../services';
 import store from '../../store';
 import { logoutUser } from '../../actions/user';
 
 
 const LoggedUser = ({ name }) => {
     const handleClick = () => {
-        store.dispatch(logoutUser())
+        const service = new AuthService();
+        service.logoutUser().then(() => store.dispatch(logoutUser()));
     }
 
     return (
