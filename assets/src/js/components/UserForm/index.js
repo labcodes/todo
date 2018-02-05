@@ -11,7 +11,7 @@ import {
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-import { AuthService } from '../../services';
+import AuthService from '../../services/AuthService';
 import store from '../../store';
 import { loginUser } from '../../actions/user';
 

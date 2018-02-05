@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 
 
-import { AuthService } from '../../services';
+import AuthService from '../../services/AuthService';
 import store from '../../store';
 import { logoutUser } from '../../actions/user';
 
