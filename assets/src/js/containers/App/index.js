@@ -2,6 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Jumbotron } from 'reactstrap';
 
+import AuthService from '../../services/AuthService';
+import store from '../../store';
+import { loginUser } from '../../actions/user';
 import Header from '../../components/Header';
 import Todos from '../../components/Todos';
 
@@ -11,16 +14,20 @@ class App extends React.Component {
         super(props);
     }
 
-    isAuthenticated () {
-        return this.props.user && !!this.props.user.token;
+    componentWillMount () {
+        const auth = new AuthService();
+        const user = auth.getLoggedUser();
+        if (user) {
+            store.dispatch(loginUser(user));
+        }
     }
 
     render() {
-        const { user: { name }, todos } = this.props;
+        const { user: { name } } = this.props;
         return (
             <div className="container">
                 <Header name={name}/>
-                {this.isAuthenticated() ?
+                {!!name ?
                     <Todos /> :
                     <Jumbotron>
                         <h1 className="display-3">Hello, Stranger!</h1>
