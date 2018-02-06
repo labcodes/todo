@@ -19,7 +19,7 @@ class AuthService {
         return new Promise((resolve, reject) => {
             api.login(data)
             .then(response => {
-                storage.setToken(response.token);
+                storage.setAuth(response);
                 resolve(response);
             })
             .catch(reason => reject(reason))
@@ -33,7 +33,7 @@ class AuthService {
         return new Promise((resolve, reject) => {
             api.signup(data)
             .then(response => {
-                storage.setToken(response.token);
+                storage.setAuth(response);
                 resolve(response);
             })
             .catch(reason => reject(reason))
@@ -42,10 +42,16 @@ class AuthService {
 
     logoutUser() {
         return new Promise((resolve, reject) => {
-            this.storage.setToken('');
+            this.storage.setAuth({});
             resolve();
         })
     }
+
+    getLoggedUser() {
+        const auth = this.storage.getAuth();
+        return auth && auth.user
+    }
+
 }
 
 export default AuthService;

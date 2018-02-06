@@ -79,12 +79,15 @@ class APIService {
 
     getHeaders() {
         const storage = new StorageService();
-        const token = storage.getToken();
+        const token = storage.getAuth().token;
 
-        return {
+        let headers = {
           "Content-type": "application/json",
-          "Authorization": "JWT " + token
         }
+        if (token) {
+            headers["Authorization"] = "JWT " + token
+        }
+        return headers
     }
 
 }

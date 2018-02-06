@@ -1,14 +1,14 @@
 class StorageService {
     constructor () {
-        this.TOKEN_KEY = 'TOKEN';
+        this.AUTH_KEY = 'AUTH';
     }
 
-    getToken () {
-        return localStorage.getItem(this.TOKEN_KEY, '');
+    getAuth () {
+        return JSON.parse(localStorage.getItem(this.AUTH_KEY));
     }
 
-    setToken (token) {
-        return localStorage.setItem(this.TOKEN_KEY, token);
+    setAuth (data) {
+        return localStorage.setItem(this.AUTH_KEY, JSON.stringify(data));
     }
 
 }
