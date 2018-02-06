@@ -5,24 +5,27 @@ import PropTypes from 'prop-types';
 import APIService from '../../services/APIService';
 import store from '../../store';
 import { addTodos } from '../../actions/todo';
+import TodoForm from '../TodoForm';
+import Todo from '../Todo';
 
 
 class Todos extends React.Component {
 
     componentWillMount() {
         const api =  new APIService();
-        const todos = api.get(api.TODO_LIST_URL)
-        .then(todos => store.dispatch(addTodos(todos)))
+        api.listTodos().then(todos => store.dispatch(addTodos(todos)))
     }
 
     render () {
+        const colClass = 'col-xs-12 col-md-4 mb-30';
         return (
-            <div>
-                <ul>
-                    {this.props.todos.map(todo => (
-                        <li key={todo.id}> id={todo.id} name={todo.name}</li>
-                    ))}
-                </ul>
+            <div className="row">
+                <div className={colClass}><TodoForm /></div>
+                {this.props.todos.map(todo => (
+                    <div className={colClass} key={todo.id}>
+                        <TodoForm id={todo.id} name={todo.name} />
+                    </div>
+                ))}
             </div>
         )
     }
