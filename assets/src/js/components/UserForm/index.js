@@ -12,8 +12,6 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import AuthService from '../../services/AuthService';
-import store from '../../store';
-import { loginUser } from '../../actions/user';
 
 
 class UserForm extends React.Component {
@@ -50,16 +48,8 @@ class UserForm extends React.Component {
         const action = this.action == this.LOGIN ? service.loginUser : service.signupUser;
 
         action(this.formData)
-        .then((response) => {
-            store.dispatch(loginUser({
-                email: response.user.email,
-                name: response.user.name,
-            }))
-            this.successCallback();
-        })
-        .catch((reason) => {
-            this.setErrors(reason);
-        });
+        .then(response => this.successCallback())
+        .catch(reason => this.setErrors(reason));
 
         e.preventDefault();
     }

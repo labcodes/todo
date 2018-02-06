@@ -4,14 +4,12 @@ import { Button } from 'reactstrap';
 
 
 import AuthService from '../../services/AuthService';
-import store from '../../store';
-import { logoutUser } from '../../actions/user';
 
 
 const LoggedUser = ({ name }) => {
     const handleClick = () => {
         const service = new AuthService();
-        service.logoutUser().then(() => store.dispatch(logoutUser()));
+        service.logoutUser();
     }
 
     return (
