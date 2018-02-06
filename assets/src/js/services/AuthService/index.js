@@ -14,11 +14,10 @@ class AuthService {
 
     loginUser(data) {
         const api = this.api,
-              url = this.api.LOGIN_URL,
               storage = this.storage;
 
         return new Promise((resolve, reject) => {
-            api.post(url, data)
+            api.login(data)
             .then(response => {
                 storage.setToken(response.token);
                 resolve(response);
@@ -29,11 +28,10 @@ class AuthService {
 
     signupUser(data) {
         const api = this.api,
-              url = this.api.SIGNUP_URL,
               storage = this.storage;
 
         return new Promise((resolve, reject) => {
-            api.post(url, data)
+            api.signup(data)
             .then(response => {
                 storage.setToken(response.token);
                 resolve(response);

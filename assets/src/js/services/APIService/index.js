@@ -4,34 +4,73 @@ import StorageService from '../StorageService';
 
 class APIService {
     constructor () {
-        this.LOGIN_URL = 'api/v1.0/users/api-token-auth/';
-        this.SIGNUP_URL = 'api/v1.0/users/signup/';
-        this.TODO_LIST_URL = 'api/v1.0/todo/todo-lists/';
+        this.API_URL = 'api/v1.0';
 
+        this.get = this.get.bind(this);
         this.post = this.post.bind(this);
+        this.put = this.put.bind(this);
     }
 
-    post (url, data) {
-        const headers = this.getHeaders();
+    login(data) {
+        return this.post(`${this.API_URL}/users/api-token-auth/`, data)
+    }
+
+    signup(data) {
+        return this.post(`${this.API_URL}/users/signup/`, data)
+    }
+
+    listTodos(params) {
+        return this.get(`${this.API_URL}/todo/todo-lists/`, params)
+    }
+
+    createTodo(data) {
+        return this.post(`${this.API_URL}/todo/todo-lists/`, data)
+    }
+
+    getTodo(id) {
+        return this.get(`${this.API_URL}/todo/todo-lists/${id}/`)
+    }
+
+    updateTodo(data) {
+        return this.put(`${this.API_URL}/todo/todo-lists/${data.id}/`, data)
+    }
+
+    get (url, params={}) {
         return new Promise((resolve, reject) => {
+            const headers = this.getHeaders();
             axios({
                 url: url,
-                method: 'POST',
+                method: 'GET',
                 headers: headers,
-                data: JSON.stringify(data)
+                params: params,
             })
             .then(response => resolve(response.data))
             .catch(reason => reject(reason.response.data))
         })
     }
 
-    get (url) {
-        const headers = this.getHeaders();
+    post (url, data) {
         return new Promise((resolve, reject) => {
+            const headers = this.getHeaders();
             axios({
                 url: url,
-                method: 'GET',
+                method: 'POST',
                 headers: headers,
+                data: JSON.stringify(data),
+            })
+            .then(response => resolve(response.data))
+            .catch(reason => reject(reason.response.data))
+        })
+    }
+
+    put (url, data) {
+        return new Promise((resolve, reject) => {
+            const headers = this.getHeaders();
+            axios({
+                url: url,
+                method: 'PUT',
+                headers: headers,
+                data: JSON.stringify(data),
             })
             .then(response => resolve(response.data))
             .catch(reason => reject(reason.response.data))
