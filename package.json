@@ -4,10 +4,11 @@
   "description": "To-Do List App",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "./node_modules/.bin/webpack --config webpack.config.js",
     "watch": "npm run start -- --watch"
   },
+  "homepage": "https://github.com/labcodes/todo#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/labcodes/todo.git"
@@ -24,7 +25,6 @@
   "bugs": {
     "url": "https://github.com/labcodes/todo/issues"
   },
-  "homepage": "https://github.com/labcodes/todo#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
@@ -35,7 +35,10 @@
     "babel-register": "^6.26.0",
     "css-loader": "^0.28.8",
     "extract-text-webpack-plugin": "^3.0.2",
+    "jest": "^22.1.4",
     "node-sass": "^4.7.2",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.1",
     "uglifyjs-webpack-plugin": "^1.1.6",
@@ -43,9 +46,10 @@
     "webpack-bundle-tracker": "^0.2.1"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-transition-group": "^2.2.1",
-    "reactstrap": "^4.8.0"
+    "reactstrap": "^5.0.0-alpha.4"
   }
 }

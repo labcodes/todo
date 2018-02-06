@@ -21,7 +21,6 @@ module.exports = {
     new ExtractText({
       filename: '[name]-[hash].css'
     }),
-    new UgliFyJS()
   ],
 
   module: {
