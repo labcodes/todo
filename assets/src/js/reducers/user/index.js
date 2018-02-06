@@ -7,7 +7,6 @@ import {
 const initialState = {
     email: null,
     name: null,
-    token: null
 };
 
 export const user = (state = initialState, action) => {
@@ -17,7 +16,6 @@ export const user = (state = initialState, action) => {
             return Object.assign({}, state, {
                 email: payload.email,
                 name: payload.name,
-                token: payload.token
             })
         case LOGOUT_USER:
             return Object.assign({}, state, initialState)
