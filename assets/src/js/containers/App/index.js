@@ -18,7 +18,7 @@ class App extends React.Component {
     render() {
         const { user: { name }, todos } = this.props;
         return (
-            <div>
+            <div className="container">
                 <Header name={name}/>
                 {this.isAuthenticated() ?
                     <Todos /> :
