@@ -1,5 +1,7 @@
 import axios from 'axios';
 import StorageService from '../StorageService';
+import store from '../../store';
+import { logoutUser } from '../../actions/user';
 
 
 class APIService {
@@ -9,6 +11,8 @@ class APIService {
         this.get = this.get.bind(this);
         this.post = this.post.bind(this);
         this.put = this.put.bind(this);
+
+        this.storage = new StorageService();
     }
 
     login(data) {
@@ -45,7 +49,7 @@ class APIService {
                 params: params,
             })
             .then(response => resolve(response.data))
-            .catch(reason => reject(reason.response.data))
+            .catch(reason => reject(this.processError(reason)))
         })
     }
 
@@ -59,7 +63,7 @@ class APIService {
                 data: JSON.stringify(data),
             })
             .then(response => resolve(response.data))
-            .catch(reason => reject(reason.response.data))
+            .catch(reason => reject(this.processError(reason)))
         })
     }
 
@@ -73,13 +77,12 @@ class APIService {
                 data: JSON.stringify(data),
             })
             .then(response => resolve(response.data))
-            .catch(reason => reject(reason.response.data))
+            .catch(reason => reject(this.processError(reason)))
         })
     }
 
     getHeaders() {
-        const storage = new StorageService();
-        const token = storage.getAuth().token;
+        const token = this.storage.getAuth().token;
 
         let headers = {
           "Content-type": "application/json",
@@ -88,6 +91,15 @@ class APIService {
             headers["Authorization"] = "JWT " + token
         }
         return headers
+    }
+
+    processError (error) {
+        const response = error.response;
+        if (response.status == 401) {
+            this.storage.setAuth({});
+            store.dispatch(logoutUser());
+        }
+        return response.data
     }
 
 }
