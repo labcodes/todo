@@ -13,7 +13,7 @@ import {
 import APIService from '../../services/APIService';
 import store from '../../store';
 import { addTodo } from '../../actions/todo';
-import { setAlert, removeAlert } from '../../actions/alert-message';
+import { setAlert } from '../../actions/alert-message';
 
 
 class TodoForm extends React.Component {
@@ -64,10 +64,6 @@ class TodoForm extends React.Component {
             type: 'ERROR',
             message: this.formatError(error)
         }));
-        setTimeout(
-            () => {store.dispatch(removeAlert())},
-            5000
-        );
     }
 
     formatError (error) {
