@@ -5,6 +5,7 @@ import { Jumbotron } from 'reactstrap';
 import AuthService from '../../services/AuthService';
 import store from '../../store';
 import { loginUser } from '../../actions/user';
+import AlertMessage from '../../components/AlertMessage';
 import Header from '../../components/Header';
 import Todos from '../../components/Todos';
 
@@ -26,6 +27,7 @@ class App extends React.Component {
         const { user: { name } } = this.props;
         return (
             <div className="container">
+                <AlertMessage />
                 <Header name={name}/>
                 {!!name ?
                     <Todos /> :
