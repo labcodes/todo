@@ -6,7 +6,6 @@ import APIService from '../../services/APIService';
 import store from '../../store';
 import { addTodos } from '../../actions/todo';
 import TodoForm from '../TodoForm';
-import Todo from '../Todo';
 
 
 class Todos extends React.Component {
