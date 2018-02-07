@@ -1,6 +1,7 @@
 import axios from 'axios';
 import StorageService from '../StorageService';
 import store from '../../store';
+import { setAlert } from '../../actions/alert-message';
 import { logoutUser } from '../../actions/user';
 
 
@@ -95,10 +96,18 @@ class APIService {
 
     processError (error) {
         const response = error.response;
+
         if (response.status == 401) {
+            if (response.data.detail == "Signature has expired.") {
+                store.dispatch(setAlert({
+                    type: 'ERROR',
+                    message: 'Your session has expired. Please login again.'
+                }))
+            }
             this.storage.setAuth({});
             store.dispatch(logoutUser());
         }
+
         return response.data
     }
 
