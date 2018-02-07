@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux';
 
-import { user } from './user';
+import { alert } from './alert-message';
 import { todo } from './todo';
+import { user } from './user';
 
 
 const todoApp = combineReducers({
+    alert,
+    todo,
     user,
-    todo
 });
 
 export default todoApp;
