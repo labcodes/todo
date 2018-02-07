@@ -8,6 +8,7 @@ import { removeAlert } from '../../actions/alert-message';
 
 import './index.scss';
 
+
 class AlertMessage extends React.Component {
     constructor (props) {
         super(props);
@@ -34,6 +35,12 @@ class AlertMessage extends React.Component {
             message: message,
             className: `position-fixed z-1000 alert-message ${visible}`,
         });
+    }
+
+    componentDidUpdate (prevProps, prevState) {
+        if (!!this.state.type && !!this.state.message) {
+            setTimeout(() => {this.dismiss()}, 5000);
+        }
     }
 
     dismiss () {
