@@ -16,7 +16,7 @@ class Todos extends React.Component {
     }
 
     render () {
-        const colClass = 'col-xs-12 col-md-4 mb-30';
+        const colClass = 'col-xs-12 col-md-4 mb-3';
         return (
             <div className="row">
                 <div className={colClass}><TodoForm /></div>
