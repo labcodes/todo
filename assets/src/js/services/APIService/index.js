@@ -40,6 +40,10 @@ class APIService {
         return this.put(`${this.API_URL}/todo/todo-lists/${data.id}/`, data)
     }
 
+    deleteTodo(id) {
+        return this.delete(`${this.API_URL}/todo/todo-lists/${id}/`)
+    }
+
     get (url, params={}) {
         return new Promise((resolve, reject) => {
             const headers = this.getHeaders();
@@ -76,6 +80,19 @@ class APIService {
                 method: 'PUT',
                 headers: headers,
                 data: JSON.stringify(data),
+            })
+            .then(response => resolve(response.data))
+            .catch(reason => reject(this.processError(reason)))
+        })
+    }
+
+    delete (url) {
+        return new Promise((resolve, reject) => {
+            const headers = this.getHeaders();
+            axios({
+                url: url,
+                method: 'DELETE',
+                headers: headers,
             })
             .then(response => resolve(response.data))
             .catch(reason => reject(this.processError(reason)))
