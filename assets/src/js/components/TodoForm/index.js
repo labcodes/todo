@@ -20,7 +20,9 @@ class TodoForm extends React.Component {
     constructor (props) {
         super(props);
 
-        this.state = {id: props.id, name: props.name || ''};
+        this.state = {id: props.id, name: props.name || '', hasChanged: false};
+        this.initialProps = Object.assign({}, ...props);
+        this.isCreation = !props.id;
         this.setName = this.setName.bind(this);
     }
 
@@ -57,6 +59,8 @@ class TodoForm extends React.Component {
             message: 'ToDo has been saved successfully!'
         };
         store.dispatch(setAlert(success));
+        this.initialProps.name = this.state.name;
+        this.setState({hasChanged: false})
     }
 
     handleError (error) {
@@ -77,13 +81,18 @@ class TodoForm extends React.Component {
     }
 
     setName (event) {
-        this.setState({name: event.target.value})
+        let value = event.target.value;
+        this.setState({
+            name: value,
+            hasChanged: value != this.initialProps.name
+        })
     }
 
     render() {
+        const bgClass = this.isCreation ? 'bg-light' : '';
         return (
             <Form onSubmit={this.handleSubmit.bind(this)}>
-                <Card>
+                <Card className={bgClass}>
                     <CardBody>
                         <CardTitle>
                             <Input
@@ -93,13 +102,17 @@ class TodoForm extends React.Component {
                                 />
                         </CardTitle>
                         <CardText></CardText>
-                        <Button type="submit">Save</Button>
+                        {this.state.hasChanged && <Button type="submit" color="primary">Save</Button>}
                     </CardBody>
                 </Card>
             </Form>
         )
     }
 };
+
+TodoForm.defaultProps = {
+    name: ''
+}
 
 TodoForm.propTypes = {
     id: PropTypes.number,
