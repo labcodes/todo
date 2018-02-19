@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { Jumbotron } from 'reactstrap';
 
 import AuthService from '../../services/AuthService';
-import store from '../../store';
-import { loginUser } from '../../actions/user';
 import AlertMessage from '../../components/AlertMessage';
 import Header from '../../components/Header';
 import Todos from '../../components/Todos';
@@ -17,10 +15,7 @@ class App extends React.Component {
 
     componentWillMount () {
         const auth = new AuthService();
-        const user = auth.getLoggedUser();
-        if (user) {
-            store.dispatch(loginUser(user));
-        }
+        auth.verifyLoggedUser();
     }
 
     render() {
