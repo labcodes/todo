@@ -18,6 +18,10 @@ class APIService {
         this.storage = new StorageService();
     }
 
+    verifyToken(data) {
+        return this.post(`${this.API_URL}/users/api-token-verify/`, data)
+    }
+
     login(data) {
         return this.post(`${this.API_URL}/users/api-token-auth/`, data)
     }

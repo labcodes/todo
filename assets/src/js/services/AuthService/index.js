@@ -12,7 +12,7 @@ class AuthService {
         this.loginUser = this.loginUser.bind(this);
         this.signupUser = this.signupUser.bind(this);
         this.logoutUser = this.logoutUser.bind(this);
-        this.getLoggedUser = this.getLoggedUser.bind(this);
+        this.verifyLoggedUser = this.verifyLoggedUser.bind(this);
         this.handleAuthenticatedUser = this.handleAuthenticatedUser.bind(this);
         this.handleAnonymousUser = this.handleAnonymousUser.bind(this);
     }
@@ -65,9 +65,11 @@ class AuthService {
         store.dispatch(logoutUser());
     }
 
-    getLoggedUser() {
-        const auth = this.storage.getAuth();
-        return auth && auth.user
+    verifyLoggedUser() {
+        const token = this.storage.getAuth();
+        this.api.verifyToken({ token })
+        .then(response => this.handleAuthenticatedUser(response))
+        .catch(reason => this.handleAnonymousUser())
     }
 
 }
