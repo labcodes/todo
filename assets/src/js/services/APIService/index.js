@@ -12,6 +12,8 @@ class APIService {
         this.get = this.get.bind(this);
         this.post = this.post.bind(this);
         this.put = this.put.bind(this);
+        this.delete = this.delete.bind(this);
+        this.request = this.request.bind(this);
 
         this.storage = new StorageService();
     }
@@ -44,13 +46,32 @@ class APIService {
         return this.delete(`${this.API_URL}/todo/todo-lists/${id}/`)
     }
 
+    // Service methods
+
     get (url, params={}) {
+        return this.request(url, 'GET', params);
+    }
+
+    post (url, data) {
+        return this.request(url, 'POST', null, data);
+    }
+
+    put (url, data) {
+        return this.request(url, 'PUT', null, data);
+    }
+
+    delete (url) {
+        return this.request(url, 'DELETE');
+    }
+
+    request (url, method, params={}, data={}) {
         return new Promise((resolve, reject) => {
             const headers = this.getHeaders();
             axios({
                 url: url,
-                method: 'GET',
+                method: method,
                 headers: headers,
+                data: JSON.stringify(data),
                 params: params,
             })
             .then(response => resolve(response.data))
@@ -58,54 +79,13 @@ class APIService {
         })
     }
 
-    post (url, data) {
-        return new Promise((resolve, reject) => {
-            const headers = this.getHeaders();
-            axios({
-                url: url,
-                method: 'POST',
-                headers: headers,
-                data: JSON.stringify(data),
-            })
-            .then(response => resolve(response.data))
-            .catch(reason => reject(this.processError(reason)))
-        })
-    }
-
-    put (url, data) {
-        return new Promise((resolve, reject) => {
-            const headers = this.getHeaders();
-            axios({
-                url: url,
-                method: 'PUT',
-                headers: headers,
-                data: JSON.stringify(data),
-            })
-            .then(response => resolve(response.data))
-            .catch(reason => reject(this.processError(reason)))
-        })
-    }
-
-    delete (url) {
-        return new Promise((resolve, reject) => {
-            const headers = this.getHeaders();
-            axios({
-                url: url,
-                method: 'DELETE',
-                headers: headers,
-            })
-            .then(response => resolve(response.data))
-            .catch(reason => reject(this.processError(reason)))
-        })
-    }
-
     getHeaders() {
-        const token = this.storage.getAuth().token;
+        const token = this.storage.getAuth();
 
         let headers = {
           "Content-type": "application/json",
         }
-        if (token) {
+        if (!!token) {
             headers["Authorization"] = "JWT " + token
         }
         return headers
@@ -121,7 +101,7 @@ class APIService {
                     message: 'Your session has expired. Please login again.'
                 }))
             }
-            this.storage.setAuth({});
+            this.storage.setAuth('');
             store.dispatch(logoutUser());
         }
 
