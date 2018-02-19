@@ -53,7 +53,7 @@ class AuthService {
     }
 
     handleAuthenticatedUser (response) {
-        this.storage.setAuth(response);
+        this.storage.setAuth(response.token);
         store.dispatch(loginUser({
             email: response.user.email,
             name: response.user.name,
@@ -61,7 +61,7 @@ class AuthService {
     }
 
     handleAnonymousUser () {
-        this.storage.setAuth({});
+        this.storage.setAuth('');
         store.dispatch(logoutUser());
     }
 
