@@ -5,73 +5,66 @@ import { loginUser, logoutUser } from '../../actions/user';
 
 
 class AuthService {
-    constructor () {
-        this.storage = new StorageService();
-        this.api = new APIService();
+  constructor() {
+    this.storage = new StorageService();
+    this.api = new APIService();
 
-        this.loginUser = this.loginUser.bind(this);
-        this.signupUser = this.signupUser.bind(this);
-        this.logoutUser = this.logoutUser.bind(this);
-        this.verifyLoggedUser = this.verifyLoggedUser.bind(this);
-        this.handleAuthenticatedUser = this.handleAuthenticatedUser.bind(this);
-        this.handleAnonymousUser = this.handleAnonymousUser.bind(this);
-    }
+    this.loginUser = this.loginUser.bind(this);
+    this.signupUser = this.signupUser.bind(this);
+    this.logoutUser = this.logoutUser.bind(this);
+    this.verifyLoggedUser = this.verifyLoggedUser.bind(this);
+    this.handleAuthenticatedUser = this.handleAuthenticatedUser.bind(this);
+    this.handleAnonymousUser = this.handleAnonymousUser.bind(this);
+  }
 
-    loginUser(data) {
-        const api = this.api,
-              storage = this.storage;
-
-        return new Promise((resolve, reject) => {
-            api.login(data)
-            .then(response => {
-                this.handleAuthenticatedUser(response);
-                resolve(response);
-            })
-            .catch(reason => reject(reason))
+  loginUser(data) {
+    return new Promise((resolve, reject) => {
+      this.api.login(data)
+        .then((response) => {
+          this.handleAuthenticatedUser(response);
+          resolve(response);
         })
-    }
+        .catch(reason => reject(reason));
+    });
+  }
 
-    logoutUser() {
-        return new Promise((resolve, reject) => {
-            this.handleAnonymousUser();
-            resolve();
+  logoutUser() {
+    return new Promise((resolve) => {
+      this.handleAnonymousUser();
+      resolve();
+    });
+  }
+
+  signupUser(data) {
+    return new Promise((resolve, reject) => {
+      this.api.signup(data)
+        .then((response) => {
+          this.handleAuthenticatedUser(response);
+          resolve(response);
         })
-    }
+        .catch(reason => reject(reason));
+    });
+  }
 
-    signupUser(data) {
-        const api = this.api,
-              storage = this.storage;
+  handleAuthenticatedUser(response) {
+    this.storage.setAuth(response.token);
+    store.dispatch(loginUser({
+      email: response.user.email,
+      name: response.user.name,
+    }));
+  }
 
-        return new Promise((resolve, reject) => {
-            api.signup(data)
-            .then(response => {
-                this.handleAuthenticatedUser(response);
-                resolve(response);
-            })
-            .catch(reason => reject(reason))
-        })
-    }
+  handleAnonymousUser() {
+    this.storage.setAuth('');
+    store.dispatch(logoutUser());
+  }
 
-    handleAuthenticatedUser (response) {
-        this.storage.setAuth(response.token);
-        store.dispatch(loginUser({
-            email: response.user.email,
-            name: response.user.name,
-        }))
-    }
-
-    handleAnonymousUser () {
-        this.storage.setAuth('');
-        store.dispatch(logoutUser());
-    }
-
-    verifyLoggedUser() {
-        const token = this.storage.getAuth();
-        this.api.verifyToken({ token })
-        .then(response => this.handleAuthenticatedUser(response))
-        .catch(reason => this.handleAnonymousUser())
-    }
-
+  verifyLoggedUser() {
+    const token = this.storage.getAuth();
+    this.api.verifyToken({ token })
+      .then(response => this.handleAuthenticatedUser(response))
+      .catch(() => this.handleAnonymousUser());
+  }
 }
 
 export default AuthService;
