@@ -8,9 +8,10 @@ import {
     PopoverHeader,
     PopoverBody
 } from 'reactstrap';
+import PropTypes from 'prop-types';
 
 import LoggedUser from '../LoggedUser';
-import LoginForm from '../LoginForm';
+import UserForm from '../UserForm';
 
 
 class Header extends React.Component {
@@ -18,9 +19,11 @@ class Header extends React.Component {
         super(props);
 
         this.toggleLoginPopover = this.toggleLoginPopover.bind(this);
+        this.toggleSignupPopover = this.toggleSignupPopover.bind(this);
 
         this.state = {
             loginPopoverOpen: false,
+            signupPopoverOpen: false,
         };
     }
 
@@ -30,30 +33,48 @@ class Header extends React.Component {
         });
     }
 
+    toggleSignupPopover() {
+        this.setState({
+            signupPopoverOpen: !this.state.signupPopoverOpen
+        });
+    }
+
 
     render () {
-        const {username} = this.props;
+        const {name} = this.props;
         return (
             <div>
                 <Navbar color="faded" light expand="md">
                   <NavbarBrand href="/">To-Do List</NavbarBrand>
 
-                  <div className={!!username ? '' : 'sr-only'}>
-                      <LoggedUser username={username}/>
+                  <div className={!!name ? '' : 'd-none'}>
+                      <LoggedUser name={name || ''}/>
                   </div>
 
-                  <div className={!!username ? 'sr-only' : ''}>
-                      <ButtonGroup>
-                          <Button onClick={this.toggleLoginPopover} id="LoginPopover">Login</Button>
-                      </ButtonGroup>
+                  <div className={!!name ? 'd-none' : ''}>
+                      <Button onClick={this.toggleLoginPopover} id="LoginButton">Login</Button>
+                      {' '}
+                      <Button onClick={this.toggleSignupPopover} id="SignupButton">Signup</Button>
+
                       <Popover
                           placement="bottom"
                           isOpen={this.state.loginPopoverOpen}
-                          target="LoginPopover"
+                          target="LoginButton"
                           toggle={this.toggleLoginPopover}>
                           <PopoverHeader>Login</PopoverHeader>
                           <PopoverBody>
-                              <LoginForm successCallback={this.toggleLoginPopover}/>
+                              <UserForm action={'LOGIN'} successCallback={this.toggleLoginPopover}/>
+                          </PopoverBody>
+                      </Popover>
+
+                      <Popover
+                          placement="bottom"
+                          isOpen={this.state.signupPopoverOpen}
+                          target="SignupButton"
+                          toggle={this.toggleSignupPopover}>
+                          <PopoverHeader>Signup</PopoverHeader>
+                          <PopoverBody>
+                              <UserForm action={'SIGNUP'} successCallback={this.toggleSignupPopover}/>
                           </PopoverBody>
                       </Popover>
                   </div>
@@ -62,6 +83,14 @@ class Header extends React.Component {
             </div>
         )
     }
+}
+
+Header.defaultProps = {
+    name: '',
+}
+
+Header.propTypes = {
+    name: PropTypes.string,
 }
 
 export default Header;
