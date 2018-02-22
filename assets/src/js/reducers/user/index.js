@@ -1,6 +1,6 @@
 import {
   LOGIN_USER,
-  LOGOUT_USER
+  LOGOUT_USER,
 } from '../../actions/user';
 
 
@@ -9,14 +9,16 @@ const initialState = {
   name: null,
 };
 
-export const user = (state = initialState, action) => {
+const user = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case LOGIN_USER:
-      return Object.assign({}, state, payload)
+      return Object.assign({}, state, payload);
     case LOGOUT_USER:
-      return Object.assign({}, state, initialState)
+      return Object.assign({}, state, initialState);
     default:
-      return state
+      return state;
   }
-}
+};
+
+export default user;
