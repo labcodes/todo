@@ -15,128 +15,125 @@ import AuthService from '../../services/AuthService';
 
 
 class UserForm extends React.Component {
-    constructor (props) {
-        super(props);
+  constructor (props) {
+    super(props);
 
-        this.LOGIN = 'LOGIN';
-        this.SIGNUP = 'SIGNUP';
+    this.LOGIN = 'LOGIN';
+    this.SIGNUP = 'SIGNUP';
 
-        this.action = props.action;
-        this.successCallback = props.successCallback;
+    this.action = props.action;
+    this.successCallback = props.successCallback;
 
-        this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
 
-        this.formData = {
-            email: '',
-            name: '',
-            password: '',
-        }
-
-        this.state = {
-            emailIsValid: null,
-            nameIsValid: null,
-            passwordIsValid: null,
-            emailError: '',
-            nameError: '',
-            passwordError: '',
-            formError: ''
-        };
+    this.formData = {
+      email: '',
+      name: '',
+      password: '',
     }
 
-    handleSubmit (e) {
-        const service = new AuthService();
-        const action = this.action == this.LOGIN ? service.loginUser : service.signupUser;
+    this.state = {
+      emailIsValid: null,
+      nameIsValid: null,
+      passwordIsValid: null,
+      emailError: '',
+      nameError: '',
+      passwordError: '',
+      formError: ''
+    };
+  }
 
-        action(this.formData)
-        .then(response => this.successCallback())
-        .catch(reason => this.setErrors(reason));
+  handleSubmit (e) {
+    const service = new AuthService();
+    const action = this.action == this.LOGIN ? service.loginUser : service.signupUser;
 
-        e.preventDefault();
-    }
+    action(this.formData)
+    .then(response => this.successCallback())
+    .catch(reason => this.setErrors(reason));
 
-    setErrors(errors) {
-        this.setState({
-            emailIsValid: !!errors.email ? false : null,
-            nameIsValid: !!errors.name ? false : null,
-            passwordIsValid: !!errors.password ? false : null,
-            emailError: errors.email && errors.email.join(' '),
-            nameError: errors.name && errors.name.join(' '),
-            passwordError: errors.password && errors.password.join(' '),
-            formError: errors.non_field_errors && errors.non_field_errors.join(' ')
-        })
-    }
+    e.preventDefault();
+  }
 
-    render() {
+  setErrors(errors) {
+    this.setState({
+      emailIsValid: !!errors.email ? false : null,
+      nameIsValid: !!errors.name ? false : null,
+      passwordIsValid: !!errors.password ? false : null,
+      emailError: errors.email && errors.email.join(' '),
+      nameError: errors.name && errors.name.join(' '),
+      passwordError: errors.password && errors.password.join(' '),
+      formError: errors.non_field_errors && errors.non_field_errors.join(' ')
+    })
+  }
 
-        const {
-            emailIsValid,
-            nameIsValid,
-            passwordIsValid,
-            emailError,
-            nameError,
-            passwordError,
-            formError,
-        } = this.state;
+  render() {
+    const {
+      emailIsValid,
+      nameIsValid,
+      passwordIsValid,
+      emailError,
+      nameError,
+      passwordError,
+      formError,
+    } = this.state;
 
-        const nameInput = () => (
-            this.action == this.SIGNUP &&
-            <FormGroup>
-                <Label for="nameInput">Name</Label>
-                <Input
-                    id="nameInput"
-                    name="name"
-                    type="text"
-                    onChange={(e) => this.formData.name = e.target.value}
-                    valid={nameIsValid}
-                />
-            <FormFeedback>{nameError}</FormFeedback>
-            </FormGroup>
-        )
+    const nameInput = () => (
+      this.action == this.SIGNUP &&
+      <FormGroup>
+        <Label for="nameInput">Name</Label>
+        <Input
+          id="nameInput"
+          name="name"
+          type="text"
+          onChange={(e) => this.formData.name = e.target.value}
+          valid={nameIsValid} />
+      <FormFeedback>{nameError}</FormFeedback>
+      </FormGroup>
+    )
 
+    return(
+      <Form onSubmit={this.handleSubmit}>
+        {formError && <Alert color="danger">{formError}</Alert>}
+        {nameInput()}
+        <FormGroup>
+          <Label for="emailInput">Email</Label>
+          <Input
+            id="emailInput"
+            name="email"
+            type="email"
+            onChange={(e) => this.formData.email = e.target.value}
+            valid={emailIsValid}
+          />
+          <FormFeedback>{emailError}</FormFeedback>
+        </FormGroup>
 
-        return(
-            <Form onSubmit={this.handleSubmit}>
-                {formError && <Alert color="danger">{formError}</Alert>}
-                {nameInput()}
-                <FormGroup>
-                    <Label for="emailInput">Email</Label>
-                    <Input
-                        id="emailInput"
-                        name="email"
-                        type="email"
-                        onChange={(e) => this.formData.email = e.target.value}
-                        valid={emailIsValid}
-                    />
-                    <FormFeedback>{emailError}</FormFeedback>
-                </FormGroup>
+        <FormGroup>
+          <Label for="passwordInput">Password</Label>
+          <Input
+            id="passwordInput"
+            name="password"
+            type="password"
+            onChange={(e) => this.formData.password = e.target.value}
+            valid={passwordIsValid}
+          />
+          <FormFeedback>{passwordError}</FormFeedback>
+        </FormGroup>
 
-                <FormGroup>
-                    <Label for="passwordInput">Password</Label>
-                    <Input
-                        id="passwordInput"
-                        name="password"
-                        type="password"
-                        onChange={(e) => this.formData.password = e.target.value}
-                        valid={passwordIsValid}
-                    />
-                    <FormFeedback>{passwordError}</FormFeedback>
-                </FormGroup>
+        <Button type="submit">Submit</Button>
 
-                <Button type="submit">Submit</Button>
-
-            </Form>
-        )
-    }
+      </Form>
+    )
+  }
 };
 
 UserForm.defaultProps = {
-    action: UserForm.LOGIN,
-    successCallback: () => {},
+  action: UserForm.LOGIN,
+  successCallback: () => {},
 }
 
 UserForm.propTypes = {
-    action: PropTypes.string.isRequired,
-    successCallback: PropTypes.func.isRequired,
+  action: PropTypes.string.isRequired,
+  successCallback: PropTypes.func.isRequired,
 }
 
 export default UserForm;
