@@ -3,7 +3,6 @@ import { combineReducers } from 'redux';
 import { alert } from './alert-message';
 import { todo } from './todo';
 import { user } from './user';
-import { todo } from './todo';
 
 
 const todoApp = combineReducers({
