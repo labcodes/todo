@@ -21,3 +21,29 @@ Migrate database
 `
 $ python manage.py migrate
 `
+
+Install Node dependencies
+
+`
+$ npm install
+`
+
+## Running the project
+
+Run Django server
+
+`
+$ python manage.py runserver
+`
+
+Build static files
+
+    - Only once
+        `
+        $ npm start
+        `
+
+    - On watch mode
+        `
+        $ npm run watch
+        `

@@ -6,9 +6,9 @@ import { user } from './user';
 
 
 const todoApp = combineReducers({
-    alert,
-    todo,
-    user,
+  alert,
+  todo,
+  user,
 });
 
 export default todoApp;
