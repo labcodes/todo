@@ -50,14 +50,14 @@ class TodoForm extends React.Component {
         store.dispatch(addTodo(todo));
         this.handleSuccess('created');
       })
-      .catch(response => this.handleError(response));
+      .catch(response => TodoForm.handleError(response));
   }
 
   update() {
     const api = new APIService();
     api.updateTodo(this.state)
       .then(() => this.handleSuccess('updated'))
-      .catch(response => this.handleError(response));
+      .catch(response => TodoForm.handleError(response));
   }
 
   delete() {
@@ -67,7 +67,7 @@ class TodoForm extends React.Component {
         store.dispatch(removeTodo(this.props));
         this.handleSuccess('deleted');
       })
-      .catch(response => this.handleError(response));
+      .catch(response => TodoForm.handleError(response));
   }
 
   handleSuccess(action) {
@@ -80,19 +80,19 @@ class TodoForm extends React.Component {
     this.setState({ hasChanged: false });
   }
 
-  handleError(error) {
-    store.dispatch(setAlert({
-      type: 'ERROR',
-      message: this.formatError(error),
-    }));
-  }
-
   setName(event) {
     const { value } = event.target;
     this.setState({
       name: value,
       hasChanged: value !== this.initialProps.name,
     });
+  }
+
+  static handleError(error) {
+    store.dispatch(setAlert({
+      type: 'ERROR',
+      message: TodoForm.formatError(error),
+    }));
   }
 
   static formatError(error) {
