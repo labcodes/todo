@@ -61,9 +61,11 @@ class AuthService {
 
   verifyLoggedUser() {
     const token = this.storage.getAuth();
-    this.api.verifyToken({ token })
-      .then(response => this.handleAuthenticatedUser(response))
-      .catch(() => this.handleAnonymousUser());
+    if (token) {
+      this.api.verifyToken({ token })
+        .then(response => this.handleAuthenticatedUser(response))
+        .catch(() => this.handleAnonymousUser());
+    }
   }
 }
 
