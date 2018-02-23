@@ -45,8 +45,6 @@ App.propTypes = {
   }),
 };
 
-/* eslint-disable no-unused-vars */
 const mapStateToProps = (state, ownProps) => ({ user: state.user });
-/* eslint-disable no-unused-vars */
 
 export default connect(mapStateToProps)(App);
