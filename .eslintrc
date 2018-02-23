@@ -10,7 +10,9 @@
         'static-methods',
         'render'
       ]
-    }]
+    }],
+    "no-unused-vars": [
+      "error", {"argsIgnorePattern": "[a-z]+Props|State$"}]
   },
   "env": {
     "browser": true
