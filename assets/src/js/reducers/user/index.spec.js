@@ -1,4 +1,4 @@
-import { user } from './index';
+import user from './index';
 
 describe('user reducer', () => {
 

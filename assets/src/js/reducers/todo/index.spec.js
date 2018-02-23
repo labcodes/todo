@@ -1,4 +1,4 @@
-import { todo } from './index';
+import todo from './index';
 
 describe('todo reducer', () => {
 
