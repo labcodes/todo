@@ -1,7 +1,8 @@
 {
-  parser: "babel-eslint",
+  "parser": "babel-eslint",
   "extends": "airbnb",
   "rules": {
+    "no-debugger": 1,
     "react/sort-comp": [2, {
       order: [
         'constructor',
