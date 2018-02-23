@@ -65,7 +65,10 @@ class TodoForm extends React.Component {
     api.deleteTodo(this.props.id)
       .then(() => {
         store.dispatch(removeTodo(this.props));
-        this.handleSuccess('deleted');
+        store.dispatch(setAlert({
+          type: 'SUCCESS',
+          message: 'ToDo has been deleted successfully!',
+        }));
       })
       .catch(response => TodoForm.handleError(response));
   }
