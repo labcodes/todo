@@ -58,11 +58,18 @@ class AlertMessage extends React.Component {
   }
 }
 
+AlertMessage.defaultProps = {
+  alert: {
+    type: '',
+    message: '',
+  },
+};
+
 AlertMessage.propTypes = {
   alert: PropTypes.shape({
     type: PropTypes.string.isRequired,
     message: PropTypes.string.isRequired,
-  }).isRequired,
+  }),
 };
 
 const mapStateToProps = (state, ownProps) => ({ alert: state.alert });
