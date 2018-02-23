@@ -41,7 +41,7 @@ App.defaultProps = {
 
 App.propTypes = {
   user: PropTypes.shape({
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
   }),
 };
 
