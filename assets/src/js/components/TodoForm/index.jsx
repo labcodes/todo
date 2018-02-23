@@ -27,6 +27,9 @@ class TodoForm extends React.Component {
     this.isCreation = !props.id;
 
     this.setName = this.setName.bind(this);
+    this.create = this.create.bind(this);
+    this.update = this.update.bind(this);
+    this.delete = this.delete.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
