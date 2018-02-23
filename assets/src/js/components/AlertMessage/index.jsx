@@ -38,7 +38,7 @@ class AlertMessage extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.type && this.state.message) {
-      setTimeout(() => { this.dismiss(); }, 5000);
+      setTimeout(() => { AlertMessage.dismiss(); }, 5000);
     }
   }
 
@@ -50,7 +50,12 @@ class AlertMessage extends React.Component {
     return (
       <Alert color={this.state.type} className={this.state.className}>
         {this.state.message}
-        <Button type="button" className="close ml-3" aria-label="Close" onClick={this.dismiss}>
+        <Button
+          type="button"
+          className="close ml-3"
+          aria-label="Close"
+          onClick={AlertMessage.dismiss}
+        >
           <span aria-hidden="true">&times;</span>
         </Button>
       </Alert>
