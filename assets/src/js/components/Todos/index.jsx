@@ -39,8 +39,6 @@ Todos.propTypes = {
   })),
 };
 
-/* eslint-disable no-unused-vars */
 const mapStateToProps = (state, ownProps) => ({ todos: state.todo });
-/* eslint-disable no-unused-vars */
 
 export default connect(mapStateToProps)(Todos);
