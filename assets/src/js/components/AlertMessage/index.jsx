@@ -47,8 +47,9 @@ class AlertMessage extends React.Component {
   }
 
   render() {
+    const { type, className } = this.state
     return (
-      <Alert color={this.state.type} className={this.state.className}>
+      <Alert color={type} className={className}>
         {this.state.message}
         <Button
           type="button"
