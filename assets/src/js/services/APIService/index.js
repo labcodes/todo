@@ -105,7 +105,7 @@ class APIService {
           message: 'Your session has expired. Please login again.',
         }));
       }
-      this.storage.setAuth('');
+      this.storage.clear();
       store.dispatch(logoutUser());
     }
 

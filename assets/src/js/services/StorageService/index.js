@@ -4,16 +4,18 @@ class StorageService {
   }
 
   getAuth() {
-    localStorage.getItem(this.AUTH_KEY);
+    return localStorage.getItem(this.AUTH_KEY);
   }
 
   setAuth(data) {
     localStorage.setItem(this.AUTH_KEY, data);
   }
 
-  clean() {
-    localStorage.clean();
+  /* eslint-disable class-methods-use-this */
+  clear() {
+    localStorage.clear();
   }
+  /* eslint-disable class-methods-use-this */
 }
 
 export default StorageService;

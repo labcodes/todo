@@ -55,7 +55,7 @@ class AuthService {
   }
 
   handleAnonymousUser() {
-    this.storage.clean();
+    this.storage.clear();
     store.dispatch(logoutUser());
   }
 
