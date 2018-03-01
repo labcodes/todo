@@ -13,10 +13,7 @@ export const alert = (state = initialState, action) => {
     const { type, payload } = action;
     switch (type) {
         case SET_ALERT:
-            return Object.assign({}, state, {
-                type: payload.type,
-                message: payload.message
-            });
+            return Object.assign({}, state, payload);
         case REMOVE_ALERT:
             return Object.assign({}, state, initialState);
         default:
