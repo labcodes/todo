@@ -48,8 +48,9 @@ class AlertMessage extends React.Component {
     }
 
     render () {
+        const { type, className } = this.state;
         return (
-            <Alert color={this.state.type} className={this.state.className}>
+            <Alert color={type} className={className}>
                 {this.state.message}
                 <Button type="button" className="close ml-3" aria-label="Close" onClick={this.dismiss}>
                     <span aria-hidden="true">&times;</span>
