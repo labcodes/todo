@@ -12,7 +12,7 @@ const user = (state = initialState, action) => {
     case LOGIN_USER:
       return Object.assign({}, state, payload);
     case LOGOUT_USER:
-      return Object.assign({}, state, initialState);
+      return initialState;
     default:
       return state;
   }
