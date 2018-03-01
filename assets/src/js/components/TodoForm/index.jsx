@@ -31,6 +31,8 @@ class TodoForm extends React.Component {
     this.update = this.update.bind(this);
     this.delete = this.delete.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
+    this.api = new APIService();
   }
 
   handleSubmit(e) {
@@ -44,8 +46,7 @@ class TodoForm extends React.Component {
   }
 
   create() {
-    const api = new APIService();
-    api.createTodo(this.state)
+    this.api.createTodo(this.state)
       .then((todo) => {
         store.dispatch(addTodo(todo));
         this.handleSuccess('created');
@@ -54,15 +55,13 @@ class TodoForm extends React.Component {
   }
 
   update() {
-    const api = new APIService();
-    api.updateTodo(this.state)
+    this.api.updateTodo(this.state)
       .then(() => this.handleSuccess('updated'))
       .catch(response => TodoForm.handleError(response));
   }
 
   delete() {
-    const api = new APIService();
-    api.deleteTodo(this.props.id)
+    this.api.deleteTodo(this.props.id)
       .then(() => {
         store.dispatch(removeTodo(this.props));
         store.dispatch(setAlert({
