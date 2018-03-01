@@ -4,11 +4,15 @@ class StorageService {
   }
 
   getAuth() {
-    return localStorage.getItem(this.AUTH_KEY);
+    localStorage.getItem(this.AUTH_KEY);
   }
 
   setAuth(data) {
-    return localStorage.setItem(this.AUTH_KEY, data);
+    localStorage.setItem(this.AUTH_KEY, data);
+  }
+
+  clean() {
+    localStorage.clean();
   }
 }
 
