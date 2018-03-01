@@ -4,10 +4,7 @@ import {
 } from '../../actions/user';
 
 
-const initialState = {
-  email: null,
-  name: null,
-};
+const initialState = {};
 
 const user = (state = initialState, action) => {
   const { type, payload } = action;
