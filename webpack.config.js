@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var CleanWebpackPlugin = require('clean-webpack-plugin');
 var BundleTracker = require('webpack-bundle-tracker');
 var ExtractText = require('extract-text-webpack-plugin');
 var UgliFyJS = require('uglifyjs-webpack-plugin');
@@ -14,6 +15,9 @@ module.exports = {
   },
 
   plugins: [
+    new CleanWebpackPlugin([path.join(__dirname, 'assets/dist')], {
+      watch: true,
+    }),
     new BundleTracker({
       path: __dirname,
       filename: 'webpack-stats.json'
