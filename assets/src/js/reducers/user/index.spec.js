@@ -5,13 +5,11 @@ describe('user reducer', () => {
     const undefinedUser = {
         name: null,
         email: null,
-        token: null
     };
 
     const loggedUser = {
         name: 'Name',
         email: 'mail@mail.com',
-        token: 'token'
     };
 
     it('should handle initial state', () => {
