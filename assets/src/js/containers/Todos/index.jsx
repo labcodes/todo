@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import APIService from '../../services/APIService';
 import store from '../../store';
 import { addTodos } from '../../actions/todo';
-import TodoForm from '../TodoForm';
+import TodoForm from '../../components/TodoForm';
 
 
 class Todos extends React.Component {

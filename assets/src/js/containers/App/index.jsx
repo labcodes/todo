@@ -4,9 +4,9 @@ import { Jumbotron } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 import AuthService from '../../services/AuthService';
-import AlertMessage from '../../components/AlertMessage';
+import AlertMessage from '../../containers/AlertMessage';
+import Todos from '../../containers/Todos';
 import Header from '../../components/Header';
-import Todos from '../../components/Todos';
 
 
 class App extends React.Component {
