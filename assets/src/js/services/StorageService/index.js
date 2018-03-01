@@ -1,6 +1,6 @@
 class StorageService {
   constructor() {
-    this.AUTH_KEY = 'AUTH';
+    this.AUTH_KEY = 'TODO_AUTH';
   }
 
   getAuth() {
