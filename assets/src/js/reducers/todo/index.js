@@ -1,28 +1,30 @@
 import {
   ADD_TODO,
   ADD_TODOS,
-  REMOVE_TODO
+  REMOVE_TODO,
 } from '../../actions/todo';
 
 
 const initialState = [];
 
-export const todo = (state = initialState, action) => {
+const todo = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case ADD_TODO:
       return [
         ...state,
-        payload
-      ]
+        payload,
+      ];
     case ADD_TODOS:
       return [
         ...state,
-        ...payload
-      ]
+        ...payload,
+      ];
     case REMOVE_TODO:
-      return state.filter(item => item.id != payload.id);
+      return state.filter(item => item.id !== payload.id);
     default:
-      return state
+      return state;
   }
-}
+};
+
+export default todo;

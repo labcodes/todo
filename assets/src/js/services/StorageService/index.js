@@ -1,17 +1,21 @@
 class StorageService {
-    constructor () {
-        this.AUTH_KEY = 'AUTH';
-    }
+  constructor() {
+    this.AUTH_KEY = 'TODO_AUTH';
+  }
 
-    getAuth () {
-        const auth = localStorage.getItem(this.AUTH_KEY) || "{}";
-        return JSON.parse(auth);
-    }
+  getAuth() {
+    return localStorage.getItem(this.AUTH_KEY);
+  }
 
-    setAuth (data) {
-        return localStorage.setItem(this.AUTH_KEY, JSON.stringify(data));
-    }
+  setAuth(data) {
+    localStorage.setItem(this.AUTH_KEY, data);
+  }
 
+  /* eslint-disable class-methods-use-this */
+  clear() {
+    localStorage.clear();
+  }
+  /* eslint-disable class-methods-use-this */
 }
 
 export default StorageService;

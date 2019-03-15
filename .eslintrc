@@ -1,0 +1,21 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "rules": {
+    "no-debugger": 1,
+    "react/sort-comp": [2, {
+      order: [
+        'constructor',
+        'lifecycle',
+        'everything-else',
+        'static-methods',
+        'render'
+      ]
+    }],
+    "no-unused-vars": [
+      "error", {"argsIgnorePattern": "[a-z]+Props|State$"}]
+  },
+  "env": {
+    "browser": true
+  }
+}

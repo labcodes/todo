@@ -1,21 +1,20 @@
 import React from 'react';
 import {
-    Alert,
-    Button,
-    Form,
-    FormFeedback,
-    FormGroup,
-    Input,
-    Label
+  Alert,
+  Button,
+  Form,
+  FormFeedback,
+  FormGroup,
+  Input,
+  Label,
 } from 'reactstrap';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 
 import AuthService from '../../services/AuthService';
 
 
 class UserForm extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.LOGIN = 'LOGIN';
@@ -30,7 +29,7 @@ class UserForm extends React.Component {
       email: '',
       name: '',
       password: '',
-    }
+    };
 
     this.state = {
       emailIsValid: null,
@@ -39,31 +38,31 @@ class UserForm extends React.Component {
       emailError: '',
       nameError: '',
       passwordError: '',
-      formError: ''
+      formError: '',
     };
-  }
-
-  handleSubmit (e) {
-    const service = new AuthService();
-    const action = this.action == this.LOGIN ? service.loginUser : service.signupUser;
-
-    action(this.formData)
-    .then(response => this.successCallback())
-    .catch(reason => this.setErrors(reason));
-
-    e.preventDefault();
   }
 
   setErrors(errors) {
     this.setState({
-      emailIsValid: !!errors.email ? false : null,
-      nameIsValid: !!errors.name ? false : null,
-      passwordIsValid: !!errors.password ? false : null,
+      emailIsValid: errors.email ? false : null,
+      nameIsValid: errors.name ? false : null,
+      passwordIsValid: errors.password ? false : null,
       emailError: errors.email && errors.email.join(' '),
       nameError: errors.name && errors.name.join(' '),
       passwordError: errors.password && errors.password.join(' '),
-      formError: errors.non_field_errors && errors.non_field_errors.join(' ')
-    })
+      formError: errors.non_field_errors && errors.non_field_errors.join(' '),
+    });
+  }
+
+  handleSubmit(e) {
+    const service = new AuthService();
+    const action = this.action === this.LOGIN ? service.loginUser : service.signupUser;
+
+    action(this.formData)
+      .then(() => this.successCallback())
+      .catch(reason => this.setErrors(reason));
+
+    e.preventDefault();
   }
 
   render() {
@@ -78,20 +77,21 @@ class UserForm extends React.Component {
     } = this.state;
 
     const nameInput = () => (
-      this.action == this.SIGNUP &&
+      this.action === this.SIGNUP &&
       <FormGroup>
         <Label for="nameInput">Name</Label>
         <Input
           id="nameInput"
           name="name"
           type="text"
-          onChange={(e) => this.formData.name = e.target.value}
-          valid={nameIsValid} />
-      <FormFeedback>{nameError}</FormFeedback>
+          onChange={(e) => { this.formData.name = e.target.value; }}
+          valid={nameIsValid}
+        />
+        <FormFeedback>{nameError}</FormFeedback>
       </FormGroup>
-    )
+    );
 
-    return(
+    return (
       <Form onSubmit={this.handleSubmit}>
         {formError && <Alert color="danger">{formError}</Alert>}
         {nameInput()}
@@ -101,7 +101,7 @@ class UserForm extends React.Component {
             id="emailInput"
             name="email"
             type="email"
-            onChange={(e) => this.formData.email = e.target.value}
+            onChange={(e) => { this.formData.email = e.target.value; }}
             valid={emailIsValid}
           />
           <FormFeedback>{emailError}</FormFeedback>
@@ -113,7 +113,7 @@ class UserForm extends React.Component {
             id="passwordInput"
             name="password"
             type="password"
-            onChange={(e) => this.formData.password = e.target.value}
+            onChange={(e) => { this.formData.password = e.target.value; }}
             valid={passwordIsValid}
           />
           <FormFeedback>{passwordError}</FormFeedback>
@@ -122,18 +122,18 @@ class UserForm extends React.Component {
         <Button type="submit">Submit</Button>
 
       </Form>
-    )
+    );
   }
-};
+}
 
 UserForm.defaultProps = {
   action: UserForm.LOGIN,
   successCallback: () => {},
-}
+};
 
 UserForm.propTypes = {
-  action: PropTypes.string.isRequired,
-  successCallback: PropTypes.func.isRequired,
-}
+  action: PropTypes.string,
+  successCallback: PropTypes.func,
+};
 
 export default UserForm;

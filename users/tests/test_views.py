@@ -24,4 +24,4 @@ class SignUpViewTest(TestCase):
         self.assertEqual(response.status_code, 201)
         content = json.loads(response.content.decode('utf-8'))
         self.assertIn('token', content)
-        self.assertEqual(content['email'], 'mail@mail.com')
+        self.assertEqual(content['user'], {'email': 'mail@mail.com', 'name': 'name'})
